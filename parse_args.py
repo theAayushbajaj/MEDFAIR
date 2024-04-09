@@ -152,7 +152,7 @@ def create_exerpiment_setting(opt):
     
     opt['device'] = torch.device('cuda' if opt['cuda'] else 'cpu')
     
-    opt['save_folder'] = os.path.join('your_path/fariness_data/model_records', opt['dataset_name'], opt['sensitive_name'], opt['backbone'], opt['experiment'])
+    opt['save_folder'] = os.path.join('/home/aayushb/projects/def-ebrahimi/aayushb/datasets/HAM10000/model_records', opt['dataset_name'], opt['sensitive_name'], opt['backbone'], opt['experiment'])
     opt['resume_path'] = opt['save_folder']
     basics.creat_folder(opt['save_folder'])
     
@@ -202,6 +202,7 @@ def create_exerpiment_setting(opt):
             wandb_args = json.load(f)
         wandb_args["tags"] = [opt['hash']]
         wandb_args["name"] = opt['experiment']
+        
         wandb.init(**wandb_args, config = opt)
     else:
         wandb = None

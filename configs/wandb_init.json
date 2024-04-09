@@ -2,9 +2,9 @@
     "project" : "MEDFAIR",
     "name": "baseline",
     "dir": "./output/",
-    "entity": "yourname",
+    "entity": "aayushbajaj",
     "allow_val_change": true,
     "sync_tensorboard": true,
     "tags": ["all"],
-    "mode": "online"
+    "mode": "offline"
 }
