@@ -44,8 +44,9 @@ def collect_args():
     'MIMIC_III', 'eICU'])
     
     parser.add_argument('--resume_path', type = str, default='', help = 'explicitly indentify checkpoint path to resume.')
+    parser.add_argument('--data_dir', type = str, default='', help = 'explicitly indentify data path.')
     
-    parser.add_argument('--sensitive_name', default='Sex', choices=['Sex', 'Age', 'Race', 'skin_type', 'Insurance'])
+    parser.add_argument('--sensitive_name', choices=['Sex', 'Age', 'Race', 'skin_type', 'Insurance'])
     parser.add_argument('--is_3d', type=bool, default=False)
     parser.add_argument('--is_tabular', type=bool, default=False)
     
@@ -185,6 +186,14 @@ def create_exerpiment_setting(opt):
     except:
         data_setting = {}
     
+    data_setting['image_feature_path'] = os.path.join(opt['data_dir'], data_setting['image_feature_path'])
+    data_setting['pickle_train_path'] = os.path.join(opt['data_dir'], data_setting['pickle_train_path'])
+    data_setting['pickle_val_path'] = os.path.join(opt['data_dir'], data_setting['pickle_val_path'])
+    data_setting['pickle_test_path'] = os.path.join(opt['data_dir'], data_setting['pickle_test_path'])
+    data_setting['train_meta_path'] = os.path.join(opt['data_dir'], data_setting['train_meta_path'])
+    data_setting['val_meta_path'] = os.path.join(opt['data_dir'], data_setting['val_meta_path'])
+    data_setting['test_meta_path'] = os.path.join(opt['data_dir'], data_setting['test_meta_path'])
+
     opt['data_setting'] = data_setting
     
     # experiment-specific setting

@@ -3,3 +3,7 @@ __pycache__/
 
 # Ignore IPython cache
 .ipynb_checkpoints/
+
+wandb/
+current.code-workspace
+exp1.log

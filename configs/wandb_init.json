@@ -1,10 +1,10 @@
 {
     "project" : "MEDFAIR",
     "name": "baseline",
-    "dir": "./output/",
+    "dir": "/home/aayushb/projects/rrg-ebrahimi/aayushb/MEDFAIR/",
     "entity": "aayushbajaj",
     "allow_val_change": true,
     "sync_tensorboard": true,
     "tags": ["all"],
-    "mode": "offline"
+    "mode": "online"
 }

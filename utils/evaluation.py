@@ -229,6 +229,9 @@ def expected_calibration_error(pred_probs, labels, num_bins=10, metric_variant="
 
     bin_ids = cut_fn(pred_probs, num_bins, labels=False, retbins=False)
     df = pd.DataFrame({"pred_probs": pred_probs, "labels": labels, "bin_id": bin_ids})
+
+    df.labels = df.labels.astype("float")
+
     ece_df = (
         df.groupby("bin_id")
         .agg(
@@ -245,6 +248,8 @@ def expected_calibration_error(pred_probs, labels, num_bins=10, metric_variant="
     if metric_variant == "rmse":
         result = np.sqrt(result)
     return result
+
+# TODO: Implement softmax calibration error
 
 
 def fnr_fpr_spe_sens_groups(preds, labels, attrs, sens_classes, specificity_val = 0.8, threshold = 0.5):

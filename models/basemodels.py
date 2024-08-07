@@ -6,11 +6,22 @@ from torchvision.models.feature_extraction import create_feature_extractor
 
 
 class cusResNet18(nn.Module):    
-    def __init__(self, n_classes, pretrained = True):
+    def __init__(self, n_classes, pretrained = True, softmax = False, dropout = False):
         super(cusResNet18, self).__init__()
         resnet = torchvision.models.resnet18(pretrained=pretrained)
         
         resnet.fc = nn.Linear(resnet.fc.in_features, n_classes)
+
+        if softmax == True:
+            resnet.fc = nn.Sequential(resnet.fc, nn.Softmax(dim=1))
+
+        elif dropout == True:
+            resnet.fc = nn.Sequential(
+                resnet.fc,
+                nn.Dropout(0.5),
+                nn.Linear(resnet.fc.in_features, n_classes)
+            )
+            
         self.avgpool = resnet.avgpool
         
         self.returnkey_avg = 'avgpool'

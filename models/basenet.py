@@ -122,8 +122,8 @@ class BaseNet(nn.Module):
         self.network.eval()
         auc, val_loss, log_dict, pred_df = standard_val(self.opt, self.network, loader, self._criterion, self.sens_classes, self.wandb)
         
-        print('Validation epoch {}: validation loss:{}, AUC:{}'.format(
-            self.epoch, val_loss, auc))
+        print('Validation epoch {}: validation loss:{}, AUC:{}, ECE:{}'.format(
+            self.epoch, val_loss, auc, log_dict['Overall ECE']))
         return val_loss, auc, log_dict, pred_df
     
     def _test(self, loader):
@@ -205,6 +205,7 @@ class BaseNet(nn.Module):
         
         print('Finish testing, testing performance: ')
         print(log_dict)
+        self.log_wandb(log_dict)
         
         return pd.DataFrame(log_dict, index=[0])
     
@@ -218,5 +219,6 @@ class BaseNet(nn.Module):
             self.best_log_dict['FNR-group_' + str(i)] = FNR
         log_dict = basics.add_dict_prefix(self.best_log_dict, 'Val ')
         print('Validation performance: ', log_dict)
+        self.log_wandb(log_dict)
         
         return pd.DataFrame(log_dict, index=[0])

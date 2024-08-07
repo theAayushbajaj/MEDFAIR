@@ -29,9 +29,9 @@ class baseline(BaseNet):
         """Train the model for one epoch"""
 
         self.network.train()
-        auc, train_loss = standard_train(self.opt, self.network, self.optimizer, loader, self._criterion, self.wandb)
+        auc, train_loss, ece = standard_train(self.opt, self.network, self.optimizer, loader, self._criterion, self.wandb)
 
-        print('Training epoch {}: AUC:{}'.format(self.epoch, auc))
+        print('Training epoch {}: AUC:{} ECE:{}'.format(self.epoch, auc, ece))
         print('Training epoch {}: loss:{}'.format(self.epoch, train_loss))
         
         self.epoch += 1

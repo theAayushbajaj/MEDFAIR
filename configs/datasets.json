@@ -39,13 +39,13 @@
     },
     "HAM10000":
     {
-        "image_feature_path": "/home/aayushb/projects/def-ebrahimi/aayushb/datasets/HAM10000/HAM10000_images",
-        "pickle_train_path": "/home/aayushb/projects/def-ebrahimi/aayushb/datasets/HAM10000/pkls/train_images.pkl",
-        "pickle_val_path": "/home/aayushb/projects/def-ebrahimi/aayushb/datasets/HAM10000/pkls/val_images.pkl",
-        "pickle_test_path": "/home/aayushb/projects/def-ebrahimi/aayushb/datasets/HAM10000/pkls/test_images.pkl",
-        "train_meta_path": "/home/aayushb/projects/def-ebrahimi/aayushb/datasets/HAM10000/split/new_train.csv",
-        "val_meta_path": "/home/aayushb/projects/def-ebrahimi/aayushb/datasets/HAM10000/split/new_val.csv",
-        "test_meta_path": "/home/aayushb/projects/def-ebrahimi/aayushb/datasets/HAM10000/split/new_test.csv"
+        "image_feature_path": "HAM10000_images",
+        "pickle_train_path": "pkls/train_images.pkl",
+        "pickle_val_path": "pkls/val_images.pkl",
+        "pickle_test_path": "pkls/test_images.pkl",
+        "train_meta_path": "split/new_train.csv",
+        "val_meta_path": "split/new_val.csv",
+        "test_meta_path": "split/new_test.csv"
     },
     "Fitz17k":
     {
