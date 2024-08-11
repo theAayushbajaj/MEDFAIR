@@ -7,3 +7,5 @@ __pycache__/
 wandb/
 current.code-workspace
 exp1.log
+
+*.out

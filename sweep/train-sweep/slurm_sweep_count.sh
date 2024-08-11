@@ -1,9 +1,8 @@
 #!/bin/sh
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=1
-#SBATCH --partition ampere
-#SBATCH --gres=gpu:1
-#SBATCH --account your_account
+#SBATCH --gres=gpu:a100:1
+#SBATCH --account rrg-ebrahimi
 #SBATCH --time=4:30:30
 
 

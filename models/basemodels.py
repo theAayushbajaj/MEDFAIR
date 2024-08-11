@@ -4,23 +4,15 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torchvision.models.feature_extraction import create_feature_extractor
 
+from torch_uncertainty.models.resnet import resnet
+
 
 class cusResNet18(nn.Module):    
-    def __init__(self, n_classes, pretrained = True, softmax = False, dropout = False):
+    def __init__(self, n_classes, pretrained = True):
         super(cusResNet18, self).__init__()
         resnet = torchvision.models.resnet18(pretrained=pretrained)
         
         resnet.fc = nn.Linear(resnet.fc.in_features, n_classes)
-
-        if softmax == True:
-            resnet.fc = nn.Sequential(resnet.fc, nn.Softmax(dim=1))
-
-        elif dropout == True:
-            resnet.fc = nn.Sequential(
-                resnet.fc,
-                nn.Dropout(0.5),
-                nn.Linear(resnet.fc.in_features, n_classes)
-            )
             
         self.avgpool = resnet.avgpool
         
@@ -37,7 +29,8 @@ class cusResNet18(nn.Module):
         outputs = self.body(x)
         return outputs[self.returnkey_fc], outputs[self.returnkey_avg].squeeze()
     
-    
+
+
 class cusResNet50(cusResNet18):    
     def __init__(self, n_classes, pretrained = True):
         super(cusResNet50, self).__init__(n_classes, pretrained)

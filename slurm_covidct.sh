@@ -20,14 +20,14 @@ source ~/scratch/medfair/bin/activate
 
 # Copy dataset to tmpdir
 echo "Copying dataset to tmpdir"
-cp -r /home/aayushb/projects/def-ebrahimi/aayushb/datasets/HAM10000/HAM10000.tar.gz $SLURM_TMPDIR/
-tar -xzf $SLURM_TMPDIR/HAM10000.tar.gz -C $SLURM_TMPDIR/
+cp -r /home/aayushb/projects/def-ebrahimi/aayushb/medical_bias/datasets/COVID_CT_MD/COVID_CT_MD.zip $SLURM_TMPDIR/
+tar -xzf $SLURM_TMPDIR/COVID_CT_MD.tar.gz -C $SLURM_TMPDIR/
 echo "Dataset copied to tmpdir"
 
 # Executing the script
 echo "Executing the script"
 python main.py --experiment baseline \
-     --dataset_name HAM10000 \
+     --dataset_name COVID_CT_MD \
      --random_seed 0 \
      --total_epochs 20 \
      --sensitive_name Age \
@@ -35,7 +35,7 @@ python main.py --experiment baseline \
      --sens_classes 4 \
      --output_dim 1 \
      --num_classes 1 \
-     --data_dir $SLURM_TMPDIR/HAM10000 \
+     --data_dir $SLURM_TMPDIR/COVID_CT_MD \
      --backbone cusDenseNet121
 
 echo "done"
