@@ -131,6 +131,9 @@ def collect_args():
 
     # BayesCNN
     parser.add_argument("--num_monte_carlo", type=int, default=10, help="Rho parameter for SAM.")
+
+    # MC Dropout
+    parser.add_argument("--dropout_rate", type=float, default=0.5, help="Dropout rate for MC Dropout.")
     
     parser.set_defaults(cuda=True)
     

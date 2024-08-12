@@ -4,8 +4,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torchvision.models.feature_extraction import create_feature_extractor
 
-from torch_uncertainty.models.resnet import resnet
-
 
 class cusResNet18(nn.Module):    
     def __init__(self, n_classes, pretrained = True):

@@ -1,11 +1,5 @@
 #!/bin/bash
-#SBATCH --mail-user=aayush.bajaj@umontreal.ca
-#SBATCH --mail-type=BEGIN
-#SBATCH --mail-type=END
-#SBATCH --mail-type=FAIL
-#SBATCH --mail-type=REQUEUE
-#SBATCH --mail-type=ALL
-#SBATCH --job-name=HAM10k
+#SBATCH --job-name=covidct
 #SBATCH --output=%x-%j.out
 #SBATCH --nodes=1
 #SBATCH --gres=gpu:a100:1
@@ -21,7 +15,7 @@ source ~/scratch/medfair/bin/activate
 # Copy dataset to tmpdir
 echo "Copying dataset to tmpdir"
 cp -r /home/aayushb/projects/def-ebrahimi/aayushb/medical_bias/datasets/COVID_CT_MD/COVID_CT_MD.zip $SLURM_TMPDIR/
-tar -xzf $SLURM_TMPDIR/COVID_CT_MD.tar.gz -C $SLURM_TMPDIR/
+unzip $SLURM_TMPDIR/COVID_CT_MD.zip -d $SLURM_TMPDIR/
 echo "Dataset copied to tmpdir"
 
 # Executing the script

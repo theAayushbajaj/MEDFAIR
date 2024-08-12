@@ -31,6 +31,8 @@ from torch.nn import Dropout2d
 from torchvision.models.resnet import conv1x1
 from torchvision.models.resnet import conv3x3
 
+from torchvision.models.feature_extraction import create_feature_extractor
+
 
 class BasicBlock(nn.Module):
   """Basic conv block."""
@@ -303,49 +305,19 @@ def resnet50_dropout_torch(dropout_rate: float = 0.1,
   """
   return _resnet_dropout(Bottleneck, [3, 4, 6, 3], dropout_rate, **kwargs)
 
-class cusResNet50_mcdropout():
+class cusResNet50_mcdropout(nn.Module):
     def __init__(self, n_classes, pretrained = True, dropout_rate = 0.1):
         self.model = resnet50_dropout_torch(dropout_rate=dropout_rate, num_classes=n_classes)
         self.model.fc = nn.Linear(self.model.fc.in_features, n_classes)
+
+        self.body = create_feature_extractor(
+            self.model, return_nodes={'avgpool': self.returnkey_avg, 'fc': self.returnkey_fc})
         
     def forward(self, x):
-        return self.model(x)
+        outputs = self.body(x)
+        return outputs[self.returnkey_fc], outputs[self.returnkey_avg].squeeze()
     
     def inference(self, x):
-        return self.model(x)
-    
-    def load_state_dict(self, state_dict):
-        self.model.load_state_dict(state_dict)
-    
-    def state_dict(self):
-        return self.model.state_dict()
-    
-    def parameters(self):
-        return self.model.parameters()
-    
-    def train(self):
-        self.model.train()
-    
-    def eval(self):
-        self.model.eval()
-    
-    def to(self, device):
-        self.model.to(device)
-    
-    def zero_grad(self):
-        self.model.zero_grad()
-    
-    def __call__(self, x):
-        return self.model(x)
-    
-    def __str__(self):
-        return str(self.model)
-    
-    def __repr__(self):
-        return repr(self.model)
-    
-    def __getitem__(self, key):
-        return self.model[key]
-    
-    def __setitem__(self, key, value):
-        self.model[key] = value
+        outputs = self.body(x)
+        return outputs[self.returnkey_fc], outputs[self.returnkey_avg].squeeze()
+  
