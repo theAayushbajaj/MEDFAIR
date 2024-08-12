@@ -17,7 +17,7 @@ args = parser.parse_args()
 # read metadata
 path = args.data_dir
 
-demo_data = pd.read_csv(path + '/Clinical-data.csv')
+demo_data = pd.read_csv(path + '/Clinical-data.csv', skiprows=1)
 demo_data
 
 Diagnosis_list = demo_data['Diagnosis'].values.tolist()
@@ -58,6 +58,6 @@ os.makedirs(path + '/split', exist_ok=True)
 
 save_dir = path + '/split/'
 
-sub_train.to_csv(save_dir + 'new_train.csv')
-sub_val.to_csv(save_dir + 'new_val.csv')
-sub_test.to_csv(save_dir + 'new_test.csv')
+sub_train.to_csv(save_dir + 'new_train.csv', index=False)
+sub_val.to_csv(save_dir + 'new_val.csv', index=False)
+sub_test.to_csv(save_dir + 'new_test.csv', index=False)

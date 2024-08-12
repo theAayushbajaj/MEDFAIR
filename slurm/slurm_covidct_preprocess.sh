@@ -9,11 +9,11 @@
 
 module load python/3.11.5 scipy-stack opencv/4.9.0 httpproxy
 
-source ~/scratch/compute/bin/activate
+source ~/scratch/medfair/bin/activate
 
 echo "Copying dataset to tmpdir"
 cp -r /home/aayushb/projects/def-ebrahimi/aayushb/medical_bias/datasets/COVID_CT_MD/COVID_CT_MD.zip $SLURM_TMPDIR/
-unzip $SLURM_TMPDIR/COVID_CT_MD.zip -d $SLURM_TMPDIR/
+unzip $SLURM_TMPDIR/COVID_CT_MD.zip -d $SLURM_TMPDIR/COVID_CT_MD
 echo "Dataset copied to tmpdir"
 
 python /home/aayushb/projects/def-ebrahimi/aayushb/medical_bias/MEDFAIR/notebooks/CovidCT.py \
