@@ -156,7 +156,7 @@ def create_exerpiment_setting(opt):
     
     opt['device'] = torch.device('cuda' if opt['cuda'] else 'cpu')
     
-    opt['save_folder'] = os.path.join('/home/aayushb/projects/def-ebrahimi/aayushb/datasets/HAM10000/model_records', opt['dataset_name'], opt['sensitive_name'], opt['backbone'], opt['experiment'])
+    opt['save_folder'] = os.path.join('/home/aayushb/projects/def-ebrahimi/aayushb/datasets/', opt['dataset_name'], opt['sensitive_name'], opt['backbone'], opt['experiment'])
     opt['resume_path'] = opt['save_folder']
     basics.creat_folder(opt['save_folder'])
     
