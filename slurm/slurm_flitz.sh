@@ -18,17 +18,17 @@ cp -r /home/aayushb/projects/def-ebrahimi/aayushb/medical_bias/datasets/Fitz17k/
 unzip $SLURM_TMPDIR/finalfitz17k.zip -d $SLURM_TMPDIR/finalfitz17k
 echo "Dataset copied to tmpdir"
 
-# Executing the script
+
 echo "Executing the script"
 python /home/aayushb/projects/def-ebrahimi/aayushb/medical_bias/MEDFAIR/main.py --experiment baseline \
      --dataset_name Fitz17k \
      --random_seed 0 \
      --total_epochs 20 \
      --sensitive_name skin_type \
-     --batch_size 1024 \
+     --batch_size 256 \
      --output_dim 1 \
      --num_classes 1 \
      --data_dir $SLURM_TMPDIR/finalfitz17k \
-     --backbone cusDenseNet121
+     --backbone cusResNet18
 
 echo "done"

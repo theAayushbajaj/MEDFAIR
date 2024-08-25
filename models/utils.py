@@ -10,6 +10,7 @@ def standard_train(opt, network, optimizer, loader, _criterion, wandb):
     """Train the model for one epoch"""
     train_loss, auc, no_iter = 0., 0., 0
     tol_output, tol_target, tol_sensitive, tol_index = [], [], [], []
+    torch.cuda.empty_cache()
     for i, (images, targets, sensitive_attr, index) in enumerate(loader):
         images, targets, sensitive_attr = images.to(opt['device']), targets.to(opt['device']), sensitive_attr.to(opt['device'])
         optimizer.zero_grad()
@@ -34,6 +35,8 @@ def standard_train(opt, network, optimizer, loader, _criterion, wandb):
         
         if opt['log_freq'] and (i % opt['log_freq'] == 0):
             wandb.log({'Training loss': train_loss / no_iter, 'Training AUC': auc / no_iter})
+
+        torch.cuda.empty_cache()
 
     auc = 100 * auc / no_iter
     ece = expected_calibration_error(np.array(tol_output), np.array(tol_target))
@@ -70,6 +73,8 @@ def standard_val(opt, network, loader, _criterion, sens_classes, wandb):
             if opt['log_freq'] and (i % opt['log_freq'] == 0):
                 wandb.log({'Validation loss': val_loss / no_iter, 'Validation AUC': auc / no_iter})
 
+            torch.cuda.empty_cache()
+            
     auc = 100 * auc / no_iter
     val_loss /= no_iter
     log_dict, t_predictions, pred_df = calculate_metrics(tol_output, tol_target, tol_sensitive, tol_index, sens_classes)
