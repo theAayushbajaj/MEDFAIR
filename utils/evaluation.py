@@ -250,7 +250,7 @@ def expected_calibration_error(pred_probs, labels, num_bins=10, metric_variant="
         result = np.sqrt(result)
     return result
 
-# TODO: Implement mcdropout
+# TODO: Implement mcdropout ADD PAPER AND CODE LINK
 def enable_dropout(model):
     """ Function to enable the dropout layers during test-time """
     for m in model.modules():

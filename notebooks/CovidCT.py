@@ -61,3 +61,40 @@ save_dir = path + '/split/'
 sub_train.to_csv(save_dir + 'new_train.csv', index=False)
 sub_val.to_csv(save_dir + 'new_val.csv', index=False)
 sub_test.to_csv(save_dir + 'new_test.csv', index=False)
+
+
+import pydicom
+from PIL import Image
+import pickle
+
+train_meta = pd.read_csv(save_dir + 'new_train.csv')
+val_meta = pd.read_csv('/home/aayushb/projects/def-ebrahimi/aayushb/datasets/HAM10000/split/new_val.csv')
+test_meta = pd.read_csv('/home/aayushb/projects/def-ebrahimi/aayushb/datasets/HAM10000/split/new_test.csv')
+
+def save_pkl(df, pkl_filename):
+    images = []
+    for i in range(len(df)):
+
+        # Open the DICOM file
+        dcm = pydicom.dcmread(df.iloc[i]['Path'])
+        # Convert DICOM to numpy array
+        img_array = dcm.pixel_array
+        # Normalize to 0-255
+        img_array = ((img_array - img_array.min()) * (1/(img_array.max() - img_array.min()) * 255)).astype('uint8')
+        # Resize each slice to 256x256
+        img_array = np.array([np.array(Image.fromarray(slice).resize((256, 256))) for slice in img_array])
+        # Take the central 80 slices
+        start = len(img_array) // 2 - 40
+        img_array = img_array[start:start+80]
+        # Random cropping of size 224x224x80 for training
+        start_x = np.random.randint(0, img_array.shape[1] - 224)
+        start_y = np.random.randint(0, img_array.shape[2] - 224)
+        img_array = img_array[:, start_x:start_x+224, start_y:start_y+224]
+        images.append(img_array)
+
+    with open(path + f'{pkl_filename}.pkl', 'wb') as f:
+        pickle.dump(images, f)
+
+save_pkl(train_meta, 'train_images')
+save_pkl(val_meta, 'val_images')
+save_pkl(test_meta, 'test_images')

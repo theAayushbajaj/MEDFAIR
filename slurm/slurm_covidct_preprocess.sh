@@ -17,7 +17,7 @@ unzip $SLURM_TMPDIR/COVID_CT_MD.zip -d $SLURM_TMPDIR/COVID_CT_MD
 echo "Dataset copied to tmpdir"
 
 python /home/aayushb/projects/def-ebrahimi/aayushb/medical_bias/MEDFAIR/notebooks/CovidCT.py \
-    --data_dir $SLURM_TMPDIR/COVID_CT_MD \
+    --data_dir $SLURM_TMPDIR/COVID_CT_MD 
 
 echo "Archiving COVID_CT_MD directory"
 tar -czvf $SLURM_TMPDIR/COVID_CT_MD.tar.gz $SLURM_TMPDIR/COVID_CT_MD

@@ -49,13 +49,13 @@
     },
     "Fitz17k":
     {
-        "image_feature_path": "yourpath",
-        "pickle_train_path": "yourpath",
-        "pickle_val_path": "yourpath",
-        "pickle_test_path": "yourpath",
-        "train_meta_path": "yourpath",
-        "val_meta_path": "yourpath",
-        "test_meta_path": "yourpath"
+        "image_feature_path": "finalfitz17k",
+        "pickle_train_path": "pkls/train_images.pkl",
+        "pickle_val_path": "pkls/val_images.pkl",
+        "pickle_test_path": "pkls/test_images.pkl",
+        "train_meta_path": "split/new_train.csv",
+        "val_meta_path": "split/new_val.csv",
+        "test_meta_path": "split/new_test.csv"
     },
     "ADNI":
     {
@@ -73,9 +73,9 @@
     },
     "COVID_CT_MD":
     {
-        "image_feature_path": "yourpath",
-        "train_meta_path": "yourpath",
-        "val_meta_path": "yourpath",
-        "test_meta_path": "yourpath"
+        "image_feature_path": "COVID_CT_MD/",
+        "train_meta_path": "split/new_train.csv",
+        "val_meta_path": "split/new_val.csv",
+        "test_meta_path": "split/new_test.csv"
     }
 }
