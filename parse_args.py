@@ -64,7 +64,7 @@ def collect_args():
     parser.add_argument('--hyper_search', type=bool, default=False, help = 'if searching hyper-parameters')
     
     # testing
-    parser.add_argraument('--hash_id', type=str, default = '')
+    parser.add_argument('--hash_id', type=str, default = '')
     
     # strategy for validation
     parser.add_argument('--val_strategy', type=str, default='loss', choices=['loss', 'worst_auc'], help='strategy for selecting val model')

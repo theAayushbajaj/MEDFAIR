@@ -4,7 +4,7 @@ import torchvision.transforms as transforms
 import datasets
 import pandas as pd
 import random
-import torchio as tio
+#import torchio as tio
 from utils.spatial_transforms import ToTensor
 
 from torchvision.transforms._transforms_video import (
